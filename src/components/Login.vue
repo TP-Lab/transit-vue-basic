@@ -18,6 +18,11 @@
               <img style="" src="/images/ledger.svg"/>
             </div>
           </el-dropdown-item>
+          <el-dropdown-item>
+            <div style="padding-top:15px;" @click="connectWallet('TokenPocket')">
+              <img style="height:24px" src="/images/tokenpocket.png"/>
+            </div>
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -69,6 +74,7 @@ import { initAccessContext } from "eos-transit";
 import scatter from "eos-transit-scatter-provider";
 import ledger from "eos-transit-ledger-provider";
 import lynx from "eos-transit-lynx-provider";
+import tp from "eos-transit-tokenpocket-provider";
 
 export default {
   name: "Login",
@@ -132,7 +138,7 @@ export default {
       }
       //set desired wallet providers
       if (this.mobileWallet) options.walletProviders = [lynx()];
-      else options.walletProviders = [scatter(), ledger()];
+      else options.walletProviders = [scatter(), ledger(), tp()];
 
       //initialize Transit with the options object
       this.accessContext = initAccessContext(options);
